@@ -12,7 +12,7 @@ const createNotEnumerableProperty = (propertyName) => {
     return propertyName;
 };
 
-const createProtoMagicObject = (propertyName) => {
+const createProtoMagicObject = () => {
     let object = () => [];
     object.prototype = object.__proto__;
     return object;
@@ -23,8 +23,20 @@ const incrementor = () => {
     Object.prototype.valueOf = () => n;
     return incrementor;
 };
-
-const asyncIncrementor = () => { };
+let n1 = 0;
+const asyncIncrementor = () => {     
+    n1++;
+    let asyncFunction = () => {
+        n1++;
+        return new Promise (resolve => {
+            setTimeout(() => {
+                resolve();
+            }, 1000)
+        });
+    }
+    Object.prototype.valueOf = () => n1;
+    return asyncFunction;
+};
 const createIncrementer = () => { };
 
 // return same argument not earlier than in one second, and not later, than in two
