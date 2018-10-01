@@ -20,12 +20,8 @@ const createProtoMagicObject = (propertyName) => {
 let n = 0;
 const incrementor = () => {
     n++;
-    let f = function () {
-        n++;
-        return f;
-    }
     Object.prototype.valueOf = () => n;
-    return f;
+    return incrementor;
 };
 
 const asyncIncrementor = () => { };
