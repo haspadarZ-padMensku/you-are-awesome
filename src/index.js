@@ -81,7 +81,22 @@ const returnBackInSecond = (param) => {
 	});
 };
 
-const getDeepPropertiesCount = () => { };
+const getDeepPropertiesCount = (object) => {
+	let count = 0;
+	
+	function counter(object) {
+		for (key in object) {
+			count++;
+			if(typeof object[key] === 'object') {
+				counter(object[key]);
+			}	
+		}
+		return count;
+	};
+
+	return counter(object);
+};
+
 const createSerializedObject = () => { };
 const toBuffer = () => { };
 const sortByProto = () => { };
